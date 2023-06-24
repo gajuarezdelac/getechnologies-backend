@@ -1,0 +1,165 @@
+
+
+
+<div class="container">
+    <nz-tabset>
+        <nz-tab nzTitle="Módulo de facturas">
+            <div class="site-page-header-ghost-wrapper">
+                <nz-page-header  [nzGhost]="false">
+                  <nz-page-header-title>Módulo de facturas</nz-page-header-title>
+                  <nz-page-header-subtitle>Listado de facturas</nz-page-header-subtitle>
+                  <nz-page-header-extra>
+                    <nz-space>
+                      <button *nzSpaceItem nz-button  (click)="showCreateDrawerInvoice()">Crear factura</button>
+                    </nz-space>
+                  </nz-page-header-extra>
+                  <nz-page-header-content>
+                    <nz-table #basicTable [nzData]="listOfData">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of basicTable.data">
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.age }}</td>
+                            <td>{{ data.address }}</td>
+                            <td>
+                              <nz-space>
+                                <button *nzSpaceItem nz-button  (click)="showEditDrawerInvoice()">
+                                      Editar
+                                </button>
+
+                                <button *nzSpaceItem nz-button nzDanger (click)="showCreateDrawerPerson()">
+                                  Eliminar
+                                </button>
+
+                              </nz-space>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                  </nz-page-header-content>
+                </nz-page-header>
+              </div>
+        </nz-tab>
+        
+        <nz-tab nzTitle="Administración de personas">
+            <div class="site-page-header-ghost-wrapper">
+                <nz-page-header  [nzGhost]="false">
+                  <nz-page-header-title>Módulo de personas</nz-page-header-title>
+                  <nz-page-header-subtitle>Listado de personas</nz-page-header-subtitle>
+                  <nz-page-header-extra>
+                    <nz-space>
+                      <button *nzSpaceItem nz-button (click)="showCreateDrawerPerson()">Agregar persona</button>
+                    </nz-space>
+                  </nz-page-header-extra>
+                  <nz-page-header-content>
+                    <nz-table #basicTable [nzData]="listOfData">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of basicTable.data">
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.age }}</td>
+                            <td>{{ data.address }}</td>
+                            <td>
+                              <nz-space>
+                                <button *nzSpaceItem nz-button  (click)="showEditDrawerPerson()">
+                                      Editar
+                                </button>
+
+                                <button *nzSpaceItem nz-button nzDanger (click)="showCreateDrawerPerson()">
+                                  Eliminar
+                                </button>
+
+                              </nz-space>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+                  </nz-page-header-content>
+                </nz-page-header>
+              </div>
+
+
+        </nz-tab>
+      </nz-tabset>
+</div>
+
+
+<nz-drawer
+[nzWidth]="400"
+[nzClosable]="false"
+[nzVisible]="visibleCreatePDrawer"
+nzPlacement="right"
+nzTitle="Crear persona"
+(nzOnClose)="hideCreateDrawerPerson()"
+>
+<ng-container *nzDrawerContent>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</ng-container>
+</nz-drawer>
+
+
+<nz-drawer
+[nzWidth]="400"
+[nzClosable]="false"
+[nzVisible]="visibleEditPDrawer"
+nzPlacement="right"
+nzTitle="Editar persona"
+(nzOnClose)="hideeditDrawerPerson()"
+>
+<ng-container *nzDrawerContent>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</ng-container>
+</nz-drawer>
+
+
+
+<nz-drawer
+[nzWidth]="400"
+[nzClosable]="false"
+[nzVisible]="visibleCreateFDrawer"
+nzPlacement="right"
+nzTitle="Crear factura"
+(nzOnClose)="hideDCreaterawerInvoice()"
+>
+<ng-container *nzDrawerContent>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</ng-container>
+</nz-drawer>
+
+
+
+<nz-drawer
+[nzWidth]="400"
+[nzClosable]="false"
+[nzVisible]="visibleEditFDrawer"
+nzPlacement="right"
+nzTitle="Editar factura"
+(nzOnClose)="hideEditDrawerInvoice()"
+>
+<ng-container *nzDrawerContent>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</ng-container>
+</nz-drawer>
+
