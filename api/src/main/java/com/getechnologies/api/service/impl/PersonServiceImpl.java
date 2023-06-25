@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,8 @@ import com.getechnologies.api.service.PersonService;
 @Transactional
 public class PersonServiceImpl implements PersonService{
 	
+	private static final Logger logger = Logger.getLogger(PersonServiceImpl.class);
+	
 	@Autowired
 	private PersonRepository repo;
 	
@@ -31,16 +34,19 @@ public class PersonServiceImpl implements PersonService{
 
 	@Override
 	public Person findPeopleByIdentification(String identification) throws GenericException {
+		logger.info("Method: "  + "findPeopleByIdentification " + "Params: " + identification);
 		return existIdentification(identification);
 	}
 
 	@Override
 	public List<Person> getAllPeople() {
+		logger.info("Method: "  + "getAllPeople " + "Params: ");
 		return repo.findAll();
 	}
 
 	@Override
 	public Page<Person> getAllPeoplePaginate(int pageNo, int pageSize) {
+		logger.info("Method: "  + "getAllPeoplePaginate " + "Params: " + "N/A");
 		Pageable pageable = PageRequest.of(pageNo, pageSize);   
 		Page<Person> response = repo.findAll(pageable);
 		return response;
@@ -48,6 +54,7 @@ public class PersonServiceImpl implements PersonService{
 
 	@Override
 	public Person deleteByIdentification(Long id) throws GenericException {
+		logger.info("Method: "  + "deleteByIdentification " + "Params: " + id);
 		Person p = existPerson(id);
 		List<Invoice> list = repoInvoice.findInvoiceByPersona(id);
 		repoInvoice.deleteAll(list);
@@ -57,10 +64,9 @@ public class PersonServiceImpl implements PersonService{
 
 	@Override
 	public Person createPerson(PersonParams request) throws GenericException {
-		
+		logger.info("Method: "  + "createPerson " + "Params: " + request.toString());		
 		validaIdentification(request.getIdentificacion());
 		Person res = new Person();
-		
 		res.setApellidoMaterno(request.getApellidoMaterno());
 		res.setApellidoPaterno(request.getApellidoPaterno());
 		res.setIdentificacion(request.getIdentificacion());
@@ -73,7 +79,7 @@ public class PersonServiceImpl implements PersonService{
 	
 	@Override
 	public Person editPerson(Long id,PersonParams request) throws GenericException {
-		
+		logger.info("Method: "  + "createPerson " + "Params: " + request.toString());		
 		Person res = existPerson(id);
 		res.setApellidoMaterno(request.getApellidoMaterno());
 		res.setApellidoPaterno(request.getApellidoPaterno());

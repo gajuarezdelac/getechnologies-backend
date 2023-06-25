@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +21,14 @@ import com.getechnologies.api.repository.PersonRepository;
 import com.getechnologies.api.service.InvoiceService;
 
 
+
+
 @Component
 @Transactional
 public class InvoiceServiceImpl implements InvoiceService{
+		
+	final static Logger logger = Logger.getLogger(InvoiceServiceImpl.class);
 
-	
 	@Autowired
 	private InvoiceRepository repo;
 	
@@ -33,11 +37,13 @@ public class InvoiceServiceImpl implements InvoiceService{
 	
 	@Override
 	public List<Invoice> findInvoicesByPerson(Long personId) {
+		logger.info("Method: "  + "findInvoicesByPerson" + "Params: " + personId);
 		return repo.findInvoiceByPersona(personId);
 	}
 
 	@Override
 	public Page<Invoice> getAllInvoicesByPerson(Long personId, int pageNo, int pageSize) {
+		logger.info("Method: "  + "getAllInvoicesByPerson" + "Params: " + personId);
 		Pageable pageable = PageRequest.of(pageNo, pageSize);   
 		Page<Invoice> response = repo.findInvoiceByPersona(personId, pageable);
 		return response;		
@@ -45,8 +51,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 
 	@Override
 	public Invoice generateInvoice(InvoiceParams request) throws GenericException {
-		
-		
+		logger.info("Method: "  + "generateInvoice " + "Params: " + request.toString());
 		Invoice r = new Invoice();
 		Person person = existPerson(request.getPersona());
 		
@@ -61,6 +66,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 
 	@Override
 	public Invoice deleteInvoice(Long id) throws GenericException {
+		logger.info("Method: "  + "deleteInvoice " + "Params: " + id);
 		Invoice elemento = existInvoice(id);
 		repo.deleteById(id);
 		return elemento;
@@ -68,7 +74,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	
 	
 	private Person existPerson(Long id) throws GenericException {
-		
+		logger.info("Method: "  + "existPerson " + "Params: " + id);
 		Person p = repoPerson.findPersonById(id);
 		
 		if(p == null) {
@@ -80,7 +86,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	
 	
 	private Invoice existInvoice(Long id) throws GenericException {
-		
+		logger.info("Method: "  + "existInvoice " + "Params: " + id);
 		Invoice p = repo.findInvoiceById(id);
 		
 		if(p == null) {

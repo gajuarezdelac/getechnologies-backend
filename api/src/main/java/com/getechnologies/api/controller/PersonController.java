@@ -24,6 +24,7 @@ import com.getechnologies.api.service.PersonService;
 @RequestMapping(path = {"/person"})
 public class PersonController {
 	
+
 	@Autowired 
 	PersonService service;
 

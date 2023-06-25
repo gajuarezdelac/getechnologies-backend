@@ -2,6 +2,7 @@ package com.getechnologies.api;
 
 import java.util.Arrays;
 
+import org.apache.log4j.BasicConfigurator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.web.filter.CorsFilter;
 public class ApiApplication {
 
 	public static void main(String[] args) {
+        BasicConfigurator.configure();
 		SpringApplication.run(ApiApplication.class, args);
 	}
 	
