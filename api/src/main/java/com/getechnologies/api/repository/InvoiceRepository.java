@@ -14,10 +14,10 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long>{
 	
 	Invoice findInvoiceById(Long id);
 	
-    @Query(value = "SELECT c.* FROM invoice AS c WHERE c.persona_id = :id",nativeQuery = true)
+    @Query(value = "SELECT c.* FROM invoice AS c WHERE c.persona_id LIKE %:id%",nativeQuery = true)
 	List<Invoice> findInvoiceByPersona(Long id);
 	
-    @Query(value = "SELECT c.* FROM invoice AS c WHERE c.persona_id = :id",nativeQuery = true)
+    @Query(value = "SELECT c.* FROM invoice AS c WHERE c.persona_id LIKE %:id%",nativeQuery = true)
 	Page<Invoice> findInvoiceByPersona(Long id, Pageable pageable);
 
 }

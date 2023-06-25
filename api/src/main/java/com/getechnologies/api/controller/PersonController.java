@@ -47,7 +47,7 @@ public class PersonController {
 	    return new ResponseEntity<>(response , HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete-by-identification/{id}")
+	@DeleteMapping("/delete-by-id/{id}")
 	public ResponseEntity<Person> deleteByIdentification(@PathVariable(value = "id") Long id) throws GenericException {
 		Person response = service.deleteByIdentification(id);
 	    return new ResponseEntity<>(response , HttpStatus.OK);
@@ -58,5 +58,11 @@ public class PersonController {
 		Person response = service.createPerson(request);
 	    return new ResponseEntity<>(response , HttpStatus.OK);
 	}
+	
+	 @PostMapping("/update/{id}")
+		public ResponseEntity<Person> editInvoice(@PathVariable(value = "id")  Long personId, @RequestBody PersonParams request) throws GenericException {
+		  Person response = service.editPerson(personId, request);
+		    return new ResponseEntity<>(response , HttpStatus.OK);
+	 }
 
 }

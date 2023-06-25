@@ -31,7 +31,6 @@ public class Person implements Serializable{
 	@Column(nullable = false)
 	private String nombre;
 	
-	@Column(nullable = false)
 	private String apellidoMaterno;
 	
 	@Column(nullable = false)

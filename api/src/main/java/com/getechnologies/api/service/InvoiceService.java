@@ -11,6 +11,7 @@ import com.getechnologies.api.exception.GenericException;
 
 @Service
 public interface InvoiceService {
+
 	
 	List<Invoice> findInvoicesByPerson(Long personId);
 	
@@ -19,5 +20,7 @@ public interface InvoiceService {
 	Invoice generateInvoice(InvoiceParams request) throws GenericException;
 	
 	Invoice deleteInvoice(Long id) throws GenericException;
+	
+	
 	
 }

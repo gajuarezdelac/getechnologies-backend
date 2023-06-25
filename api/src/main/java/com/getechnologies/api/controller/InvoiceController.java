@@ -48,7 +48,9 @@ public class InvoiceController{
 	public ResponseEntity<Invoice> generateInvoice(@RequestBody InvoiceParams request) throws GenericException {
 		Invoice response = service.generateInvoice(request);
 	    return new ResponseEntity<>(response , HttpStatus.OK);
-	}
+    }
+    
+  
 
 	@DeleteMapping("/delete-invoice/{id}")
 	public ResponseEntity<Invoice> deleteInvoice(@PathVariable(value = "id") Long id) throws GenericException {

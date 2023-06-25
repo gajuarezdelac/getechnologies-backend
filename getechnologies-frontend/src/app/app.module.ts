@@ -23,6 +23,9 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @NgModule({
@@ -46,7 +49,10 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzSpaceModule,
     NzFormModule,
     NzMessageModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzInputModule,
+    NzSpinModule,
+    NzSelectModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

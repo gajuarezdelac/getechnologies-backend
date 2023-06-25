@@ -22,5 +22,8 @@ public interface PersonService {
 	Person deleteByIdentification(Long id) throws GenericException;
 	
 	Person createPerson(PersonParams request) throws GenericException;
+	
+	Person editPerson(Long id, PersonParams request) throws GenericException;
+
 
 }

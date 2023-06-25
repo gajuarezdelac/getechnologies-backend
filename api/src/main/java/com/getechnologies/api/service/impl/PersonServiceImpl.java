@@ -10,9 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import com.getechnologies.api.domain.Invoice;
 import com.getechnologies.api.domain.Person;
 import com.getechnologies.api.domain.params.PersonParams;
 import com.getechnologies.api.exception.GenericException;
+import com.getechnologies.api.repository.InvoiceRepository;
 import com.getechnologies.api.repository.PersonRepository;
 import com.getechnologies.api.service.PersonService;
 
@@ -23,6 +25,9 @@ public class PersonServiceImpl implements PersonService{
 	
 	@Autowired
 	private PersonRepository repo;
+	
+	@Autowired
+	private InvoiceRepository repoInvoice;
 
 	@Override
 	public Person findPeopleByIdentification(String identification) throws GenericException {
@@ -44,6 +49,8 @@ public class PersonServiceImpl implements PersonService{
 	@Override
 	public Person deleteByIdentification(Long id) throws GenericException {
 		Person p = existPerson(id);
+		List<Invoice> list = repoInvoice.findInvoiceByPersona(id);
+		repoInvoice.deleteAll(list);
 		repo.deleteById(id);
 		return p;
 	}
@@ -63,6 +70,21 @@ public class PersonServiceImpl implements PersonService{
 		
 		return res;
 	}
+	
+	@Override
+	public Person editPerson(Long id,PersonParams request) throws GenericException {
+		
+		Person res = existPerson(id);
+		res.setApellidoMaterno(request.getApellidoMaterno());
+		res.setApellidoPaterno(request.getApellidoPaterno());
+		res.setIdentificacion(request.getIdentificacion());
+		res.setNombre(request.getNombre());
+		
+		repo.save(res);
+		
+		return res;
+	}
+	
 	
 	
 	private Person validaIdentification(String identification) throws GenericException {
@@ -102,6 +124,7 @@ public class PersonServiceImpl implements PersonService{
 		return p;
 		
 	}
+
 	
 	
 
